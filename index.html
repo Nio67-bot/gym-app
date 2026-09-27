@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURUM — Train heavy. Eat exact.</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="nav">
+  <a href="#top" class="wordmark">AURUM</a>
+  <nav class="nav-links">
+    <a href="#tracker">Tracker</a>
+    <a href="#shop">Shop</a>
+  </nav>
+  <a href="#tracker" class="nav-cta">Open tracker</a>
+</header>
+
+<main>
+
+  <section class="hero" id="top">
+    <div class="hero-copy">
+      <p class="hero-kicker">Calorie tracking for people who lift</p>
+      <h1>Log the plate.<br>Not the guesswork.</h1>
+      <p class="hero-sub">Snap your food, scan the barcode, or just type what's on the plate. AURUM keeps the running total so your training doesn't get undone at the table.</p>
+      <div class="hero-actions">
+        <a href="#tracker" class="btn btn-gold">Start logging</a>
+        <a href="#shop" class="btn btn-ghost">Browse gear</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <svg viewBox="0 0 260 260" class="ring-svg">
+        <circle cx="130" cy="130" r="108" class="ring-track"/>
+        <circle cx="130" cy="130" r="108" class="ring-fill"/>
+      </svg>
+      <div class="ring-center">
+        <span class="ring-number" id="heroKcal">0</span>
+        <span class="ring-label">kcal today</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="tracker" id="tracker">
+    <div class="section-head">
+      <h2>The Tracker</h2>
+      <p>Three ways in. One log.</p>
+    </div>
+
+    <div class="tracker-panel">
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="photo" role="tab" aria-selected="true">Photo</button>
+        <button class="tab" data-tab="barcode" role="tab" aria-selected="false">Barcode</button>
+        <button class="tab" data-tab="manual" role="tab" aria-selected="false">Manual</button>
+      </div>
+
+      <div class="tab-panels">
+
+        <div class="tab-panel active" data-panel="photo">
+          <p class="panel-hint">Attach a photo of the meal, then tell AURUM what's in it. The photo stays in your log as a visual record.</p>
+          <label class="dropzone" for="photoInput" id="dropzone">
+            <span class="dz-icon">＋</span>
+            <span id="dzText">Drop a photo, or click to choose one</span>
+          </label>
+          <input type="file" accept="image/*" id="photoInput" hidden>
+          <img id="photoPreview" class="photo-preview" hidden alt="Meal preview">
+          <div class="form-row">
+            <input type="text" id="photoName" placeholder="What is it — e.g. chicken rice bowl">
+          </div>
+          <div class="form-row split">
+            <input type="number" id="photoKcal" placeholder="Calories">
+            <input type="number" id="photoProtein" placeholder="Protein (g)">
+          </div>
+          <button class="btn btn-gold btn-block" id="addPhoto">Add to log</button>
+        </div>
+
+        <div class="tab-panel" data-panel="barcode">
+          <p class="panel-hint">Type the barcode digits. A handful of common products are recognised — anything else drops to manual entry.</p>
+          <div class="form-row">
+            <input type="text" id="barcodeInput" placeholder="Barcode number, e.g. 5000159484695" inputmode="numeric">
+          </div>
+          <button class="btn btn-ghost btn-block" id="lookupBarcode">Look up</button>
+          <div id="barcodeResult" class="barcode-result" hidden></div>
+        </div>
+
+        <div class="tab-panel" data-panel="manual">
+          <p class="panel-hint">Know exactly what you ate? Skip the fuss and enter it directly.</p>
+          <div class="form-row">
+            <input type="text" id="manualName" placeholder="Meal description">
+          </div>
+          <div class="form-row split">
+            <input type="number" id="manualKcal" placeholder="Calories">
+            <input type="number" id="manualProtein" placeholder="Protein (g)">
+          </div>
+          <button class="btn btn-gold btn-block" id="addManual">Add to log</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="log-panel">
+      <div class="log-summary">
+        <div>
+          <span class="log-total" id="totalKcal">0</span>
+          <span class="log-unit">kcal logged today</span>
+        </div>
+        <div class="log-protein">
+          <span id="totalProtein">0</span><span class="log-unit">g protein</span>
+        </div>
+      </div>
+      <ul class="log-list" id="logList">
+        <li class="log-empty" id="logEmpty">Nothing logged yet — add your first meal above.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="shop" id="shop">
+    <div class="section-head">
+      <h2>The Shop</h2>
+      <p>Gymshark and gymxata pieces, picked in black.</p>
+    </div>
+    <div class="shop-grid" id="shopGrid"></div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <span class="wordmark small">AURUM</span>
+  <span class="footer-note">Built for the ones who track it anyway.</span>
+</footer>
+
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <div class="modal-icon" id="modalIcon"></div>
+    <p class="modal-brand" id="modalBrand"></p>
+    <h3 id="modalName"></h3>
+    <p id="modalDesc"></p>
+    <a id="modalLink" href="#" target="_blank" rel="noopener">View in store</a>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
